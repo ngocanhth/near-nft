@@ -1,0 +1,28 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "description": "Status message example with near-sdk-js",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "run-s build:*",
+    "build-nft": "run-s build:nft-*",
+    "build:nft-contract": "near-sdk-js build src/contract-nft/football-nft.ts build/football-nft.wasm",
+    "build:nft-receiver": "near-sdk-js build src/contract-nft/test-token-receiver.ts build/nft-receiver.wasm",
+    "build:nft-approval-receiver": "near-sdk-js build src/contract-nft/test-approval-receiver.ts build/nft-approval-receiver.wasm"
+  },
+  "author": "Near Inc <hello@nearprotocol.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "near-sdk-js": "file:../",
+    "near-contract-standards": "file:../near-contract-standards/"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
+    "ava": "^4.2.0",
+    "near-workspaces": "3.2.1",
+    "typescript": "^4.7.4",
+    "npm-run-all": "^4.1.5"
+  }
+}

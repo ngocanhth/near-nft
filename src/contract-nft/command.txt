@@ -1,0 +1,45 @@
+near login
+
+export ID=ngocanhneardev.testnet
+
+echo $ID
+
+near deploy --wasmFile build/football-nft.wasm --accountId $ID
+
+near call $ID new_default_meta '{"owner_id": "'$ID'"}' --accountId $ID
+
+near view $ID nft_metadata
+
+near call ngocanhneardev.testnet init '{"owner_id": "ngocanhneardev.testnet", "metadata": { "spec": "nft-1.0.0", "name": "NFT DEMO", "symbol": "NGOCANH"}}' --accountId ngocanhneardev.testnet
+
+near call $ID nft_mint '{"token_id": "0", "receiver_id": "'$ID'", "token_metadata": { "title": "Some Art", "description": "My NFT media", "media": "https://bafkreiabag3ztnhe5pg7js4bj6sxuvkz3sdf76cjvcuqjoidvnfjz7vwrq.ipfs.dweb.link/", "copies": 1}}' --accountId $ID --deposit 0.1
+
+near view $ID nft_tokens '{"from_index": 0, "limit": 4}'
+
+near view $ID nft_metadata --accountId ngocanhneardev.testnet
+
+near view dev-1673258862564-82072859436795 nft_total_supply --accountId ngocanhneardev.testnet
+
+=======================================
+
+near dev-deploy --wasmFile build/football-nft.wasm
+
+near call dev-1673258862564-82072859436795 init '{"owner_id": "ngocanhneardev.testnet", "metadata": { "spec": "nft-1.0.0", "name": "NFT DEMO", "symbol": "NGOCANH"}}' --accountId ngocanhneardev.testnet
+
+near call dev-1673258862564-82072859436795 nft_mint '{"token_id": "1", "receiver_id": "ngocanhneardev.testnet", "token_metadata": {"title": "ngocanh dev blockchain", "description": "near metaverse", "media": "https://vsoftware.vn/wp-content/uploads/2022/12/custom-1024x384.jpg" }, "royalties": {"ngocanhneardev.testnet" : 5, "ngocanhnear.testnet" : 10}}' --accountId ngocanhneardev.testnet --deposit 0.1
+
+near call dev-1673258862564-82072859436795 nft_transfer '{"receiver_id": "ngocanhnear.testnet", "token_id": "dev-1673258862564-82072859436795", "approval_id": {"title": "ngocanh dev blockchain", "description": "near metaverse", "media": "https://vsoftware.vn/wp-content/uploads/2022/12/custom-1024x384.jpg" }, "royalties": {"ngocanhneardev.testnet" : 5, "ngocanhnear.testnet" : 10}}' --accountId ngocanhneardev.testnet --deposit 0.1
+
+near view dev-1673258862564-82072859436795 nft_tokens '{"from_index": 0, "limit": 4}'
+
+near view dev-1673258862564-82072859436795 nft_metadata --accountId ngocanhneardev.testnet
+
+near view dev-1673258862564-82072859436795 nft_token '{"token_id": "1"}' --accountId ngocanhneardev.testnet
+
+# Get Total Supply
+
+near view dev-1673258862564-82072859436795 nft_total_supply --accountId ngocanhneardev.testnet
+
+# Get Total Supply Of Owner
+
+near view dev-1673258862564-82072859436795 nft_supply_for_owner '{"account_id": "ngocanhneardev.testnet"}' --accountId ngocanhneardev.testnet
